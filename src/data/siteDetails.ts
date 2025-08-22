@@ -9,5 +9,5 @@ export const siteDetails = {
     "mailto:Marcin@openincs.com?subject=OpenIncs%20Demo%20/%20Waitlist&body=Name%3A%0ACompany%3A%0ARole%3A%0AWhat%20are%20you%20looking%20to%20find%3F%3A%0A",
   primaryCtaLabel: "Book a demo",
   // Optional secondary link
-  loginHref: "/login",
+  loginHref: "https://openincs.appsmith.com/app/openincs/login-68731e9b9640cd203506f55b?branch=master&environment=production",
 };
