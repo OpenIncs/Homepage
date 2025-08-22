@@ -12,12 +12,8 @@ import { menuItems } from '@/data/menuItems';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => setIsOpen((v) => !v);
+  const toggleMenu = () => setIsOpen(v => !v);
   const closeMenu = () => setIsOpen(false);
-
-  const ctaHref =
-    'mailto:Marcin@openincs.com?subject=OpenIncs%20Waitlist&body=Name%3A%0ACompany%3A%0AUse%20case%3A%0A';
 
   return (
     <header className="bg-transparent fixed top-0 left-0 right-0 md:absolute z-50 mx-auto w-full">
@@ -43,22 +39,33 @@ const Header: React.FC = () => {
 
           {/* Desktop Menu */}
           <ul className="hidden md:flex items-center space-x-6">
-            {menuItems.map((item) => (
-              <li key={item.text}>
-                <Link
-                  href={item.url}
-                  className="text-foreground hover:text-foreground-accent transition-colors"
-                >
-                  {item.text}
-                </Link>
-              </li>
-            ))}
+            {menuItems
+              .filter((item) => item && typeof item.url === 'string' && item.url.length > 0)
+              .map((item) => (
+                <li key={item.text}>
+                  <Link
+                    href={item.url ?? '#'}
+                    className="text-foreground hover:text-foreground-accent transition-colors"
+                  >
+                    {item.text}
+                  </Link>
+                </li>
+              ))}
+
+            {/* Secondary link */}
+            <li>
+              <Link href={siteDetails.loginHref ?? '#'} className="text-foreground/70 hover:text-foreground transition-colors">
+                Login
+              </Link>
+            </li>
+
+            {/* Primary CTA */}
             <li>
               <Link
-                href={ctaHref}
+                href={siteDetails.primaryCtaHref ?? '#'}
                 className="text-black bg-primary hover:bg-primary-accent px-8 py-3 rounded-full transition-colors"
               >
-                Join the waitlist
+                {siteDetails.primaryCtaLabel ?? 'Contact'}
               </Link>
             </li>
           </ul>
@@ -83,7 +90,7 @@ const Header: React.FC = () => {
         </nav>
       </Container>
 
-      {/* Mobile Menu with Transition */}
+      {/* Mobile Menu */}
       <Transition
         show={isOpen}
         enter="transition ease-out duration-200 transform"
@@ -95,23 +102,33 @@ const Header: React.FC = () => {
       >
         <div id="mobile-menu" className="md:hidden bg-white/95 backdrop-blur border-t border-black/5">
           <div className="px-5 py-4 space-y-3">
-            {menuItems.map((item) => (
-              <Link
-                key={item.text}
-                href={item.url}
-                className="block text-foreground hover:text-foreground-accent transition-colors py-2"
-                onClick={closeMenu}
-              >
-                {item.text}
-              </Link>
-            ))}
+            {menuItems
+              .filter((item) => item && typeof item.url === 'string' && item.url.length > 0)
+              .map((item) => (
+                <Link
+                  key={item.text}
+                  href={item.url ?? '#'}
+                  className="block text-foreground hover:text-foreground-accent transition-colors py-2"
+                  onClick={closeMenu}
+                >
+                  {item.text}
+                </Link>
+              ))}
 
             <Link
-              href={ctaHref}
+              href={siteDetails.loginHref ?? '#'}
+              className="block text-center text-foreground/80 hover:text-foreground transition-colors py-2"
+              onClick={closeMenu}
+            >
+              Login
+            </Link>
+
+            <Link
+              href={siteDetails.primaryCtaHref ?? '#'}
               className="block text-center text-black bg-primary hover:bg-primary-accent px-6 py-3 rounded-full mt-2 transition-colors"
               onClick={closeMenu}
             >
-              Join the waitlist
+              {siteDetails.primaryCtaLabel ?? 'Contact'}
             </Link>
           </div>
         </div>
@@ -121,4 +138,3 @@ const Header: React.FC = () => {
 };
 
 export default Header;
-

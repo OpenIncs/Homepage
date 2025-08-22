@@ -1,12 +1,13 @@
 export const siteDetails = {
-    siteName: 'Finwise',
-    siteUrl: 'https://finwise-omega.vercel.app/',
-    metadata: {
-        title: 'Finwise - Next.js and Tailwind CSS Landing Page Template',
-        description: 'Finwise empowers businesses with cutting-edge technology solutions to drive success and efficiency.',
-    },
-    language: 'en-us',
-    locale: 'en-US',
-    siteLogo: `${process.env.BASE_PATH || ''}/images/logo.png`, // or use a string for the logo e.g. "TechStartup"
-    googleAnalyticsId: '', // e.g. G-XXXXXXX,
-}
+  siteName: "OpenIncs",
+  siteDescription:
+    "OpenIncs maps 17M+ companies and uses AI to match you with the highest-fit partners for M&A, sales, and procurement.",
+  // points to your PNG in /public
+  siteLogo: `${process.env.BASE_PATH || ""}/openincs_logo_blue_dot.png`,
+  // Primary CTA = lead capture (best for sales-assisted right now)
+  primaryCtaHref:
+    "mailto:Marcin@openincs.com?subject=OpenIncs%20Demo%20/%20Waitlist&body=Name%3A%0ACompany%3A%0ARole%3A%0AWhat%20are%20you%20looking%20to%20find%3F%3A%0A",
+  primaryCtaLabel: "Book a demo",
+  // Optional secondary link
+  loginHref: "/login",
+};
